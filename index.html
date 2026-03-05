@@ -136,11 +136,39 @@
       }
     }
 
+    // localStorage persistence
+    const STORAGE_KEY = 'flxify-editor-content';
+
+    function loadSavedContent() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        return (typeof saved === 'string') ? saved : '';
+      } catch (e) {
+        console.warn('Could not read from localStorage:', e);
+        return '';
+      }
+    }
+
+    let saveTimeout = null;
+
+    function saveContent(text) {
+      clearTimeout(saveTimeout);
+      saveTimeout = setTimeout(() => {
+        try {
+          localStorage.setItem(STORAGE_KEY, text);
+        } catch (e) {
+          console.warn('Could not save to localStorage:', e);
+        }
+      }, 300);
+    }
+
+    const savedContent = loadSavedContent();
+
     // Create the editor
     const editorParent = document.getElementById('editor');
 
     const startState = EditorState.create({
-      doc: '',
+      doc: savedContent,
       extensions: [
         history(),
         bracketMatching(),
@@ -152,6 +180,7 @@
           if (update.docChanged) {
             updateLanguage(update.view);
             updateHintVisibility(update.state.doc);
+            saveContent(update.state.doc.toString());
           }
         }),
         EditorView.theme({
@@ -198,6 +227,12 @@
 
     // Expose to global scope for app.js
     window.cmEditor = cmEditor;
+
+    // Initialize state for restored content
+    if (savedContent.length > 0) {
+      updateHintVisibility(cmEditor.state.doc);
+      updateLanguage(cmEditor);
+    }
 
     // Focus the editor on load
     cmEditor.focus();
