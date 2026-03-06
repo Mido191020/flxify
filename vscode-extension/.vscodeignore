@@ -1,0 +1,13 @@
+.vscode/**
+.vscode-test/**
+src/extension.ts
+node_modules/**
+pkg/**
+tsconfig.json
+**/*.map
+**/*.ts
+.gitignore
+.git/**
+CLAUDE.md
+PLAN.MD
+*.vsix

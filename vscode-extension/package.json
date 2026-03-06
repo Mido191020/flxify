@@ -1,0 +1,74 @@
+{
+  "name": "flxify",
+  "displayName": "Flxify",
+  "description": "107+ text transformation scripts for developers. Format JSON, encode Base64, hash text, convert cases, and more — right in your editor.",
+  "version": "0.1.0",
+  "publisher": "flxify",
+  "author": {
+    "name": "Ahmed El Taweel"
+  },
+  "license": "MIT",
+  "icon": "icon.png",
+  "galleryBanner": {
+    "color": "#1e1e2e",
+    "theme": "dark"
+  },
+  "homepage": "https://flxify.dev",
+  "bugs": {
+    "url": "https://github.com/ahmedeltaweel/flxify/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ahmedeltaweel/flxify"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Formatters",
+    "Other"
+  ],
+  "keywords": [
+    "text",
+    "transform",
+    "format",
+    "encode",
+    "decode",
+    "hash",
+    "json",
+    "base64",
+    "uuid",
+    "developer tools",
+    "boop",
+    "swiss army knife"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "flxify.runScript",
+        "title": "Flxify: Run Script"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "flxify.runScript",
+        "key": "ctrl+shift+b",
+        "mac": "cmd+shift+b",
+        "when": "editorTextFocus"
+      }
+    ]
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile",
+    "package": "vsce package --allow-missing-repository"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.3.0"
+  }
+}

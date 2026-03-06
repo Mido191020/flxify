@@ -189,11 +189,40 @@ Each tool page at `tools/[slug]/index.html` includes:
 - Below-the-fold SEO content: How to Use, Why Use, Related Tools, FAQs
 - Status bar with credits
 
+## VS Code Extension
+
+Flxify also ships as a VS Code extension at `vscode-extension/`. It's a self-contained project that shares the same 107 scripts and 7 lib modules.
+
+### Key Architecture
+- **BoopState bridge**: Same script API (`state.text`, `state.postError()`, etc.) but maps to VS Code editor API instead of CodeMirror
+- **Require shim**: `require('@flxify/moduleName')` loads lib modules via `new Function()` (safe in Node.js, no CSP restrictions)
+- **Dynamic loading**: `fs.readdirSync()` discovers scripts at activation — no hardcoded list
+- **Multi-cursor**: Iterates `editor.selections` inside a single `editor.edit()` call = one undo step
+
+### VS Code Extension Workflow
+- **Edit extension logic**: Modify `vscode-extension/src/extension.ts`, then `npm run compile`
+- **Add/edit scripts**: Edit files in `vscode-extension/src/scripts/`, reload VS Code
+- **Test**: Open `vscode-extension/` in VS Code, press F5 (needs `.vscode/launch.json`)
+- **Package**: `npx @vscode/vsce package --allow-missing-repository`
+- **Publish**: `npx @vscode/vsce publish --pat <PAT>`
+- **Sync scripts from web app**: `cp scripts/*.js vscode-extension/src/scripts/ && cp scripts/lib/*.js vscode-extension/src/scripts/lib/`
+
+### VS Code Extension Gotchas
+21. **Sub-agents can't use Bash in the extension directory.** The `.claude/settings.local.json` Bash permissions don't cover vscode-extension commands. The orchestrator/developer agents will be blocked. Take over implementation directly when this happens.
+
+22. **`tsconfig.json` needs explicit `include` pattern.** Without `"include": ["src/**/*.ts"]`, TypeScript picks up stray `.ts` files from `pkg/` (Go telemetry modules). Always use explicit includes.
+
+23. **`.vscodeignore` must exclude aggressively.** Without it, `vsce package` bundles 20000+ files. Must exclude: `node_modules/`, `pkg/`, `.git/`, `*.map`, `*.ts`, `CLAUDE.md`, `PLAN.MD`.
+
+24. **Azure DevOps PAT for marketplace must use "All accessible organizations".** Scoping to a specific org causes "Access Denied" on `vsce login`. The publisher must also be created first at marketplace.visualstudio.com/manage.
+
+25. **Scripts in the extension are copies, not symlinks.** After adding/editing scripts in the web app's `scripts/`, manually copy them to `vscode-extension/src/scripts/`. There is no automatic sync.
+
 ## Agent Workflow
 
 This project uses three custom Claude Code agents:
-- **project-orchestrator** — Plans work, delegates to dev and QA agents, tracks progress. Reads plan.md and SEO.md for requirements.
-- **plan-developer** — Implements features according to plan.md and SEO.md specifications. Has SEO expertise for structured data, meta tags, and static page generation.
-- **qa-plan-validator** — Validates deliverables against plan.md and SEO.md requirements. Checks SEO compliance, structured data validity, and meta tag completeness.
+- **project-orchestrator** — Plans work, delegates to dev and QA agents, tracks progress. Reads plan.md, SEO.md, and PLAN.MD (VS Code extension) for requirements.
+- **plan-developer** — Implements features according to plan specifications. Has SEO expertise, full-stack development skills, and VS Code extension development knowledge.
+- **qa-plan-validator** — Validates deliverables against plan requirements. Checks SEO compliance, structured data validity, meta tag completeness, and VS Code extension functionality.
 
-Workflow: orchestrator reads plan.md/SEO.md -> delegates to plan-developer -> validates with qa-plan-validator -> reports status.
+Workflow: orchestrator reads plans -> delegates to plan-developer -> validates with qa-plan-validator -> reports status.
