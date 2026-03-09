@@ -6,7 +6,7 @@
     "Hashing": ["MD5Checksum", "SHA1Hash", "SHA256Hash", "SHA512Hash"],
     "Conversion": ["JSONToYAML", "YAMLToJSON", "JSONToCSV", "CSVToJSON", "CSVtoJSONheaderless", "JSONToQueryString", "QueryStringToJSON", "HexToRGB", "rgb2hex", "HexToDec", "HexToASCII", "ASCIIToHex", "DecimalToBinary", "BinaryToDecimal", "DecimalToHex", "WkbToWkt", "WktToWkb", "jsToPhp", "tsvToJson", "JsObjectToJSON", "convertToMarkdownTable", "IOSLocalizablesToAndroidStrings", "AndroidStringsToIOSLocalizables", "DIGI2ASCII", "FishPATHHexConverter"],
     "Text Case": ["Upcase", "Downcase", "CamelCase", "KebabCase", "SnakeCase", "StartCase", "SpongeCase", "toggleCamelHyphen", "Deburr"],
-    "Text Manipulation": ["SortLines", "NaturalSortLines", "ReverseLines", "ReverseString", "ShuffleLines", "ShuffleCharacters", "RemoveDuplicateLines", "JoinLines", "JoinLinesWithComma", "JoinLinesWithSpace", "CollapseLines", "Trim", "TrimStart", "TrimEnd", "AddSlashes", "RemoveSlashes", "ReplaceSmartQuotes", "MarkdownQuote", "Rot13", "AddLineNumbers", "RemoveLineNumbers", "SpacesToTabs", "TabsToSpaces", "SortJSON", "LineComparer", "listToHTMLList", "Wadsworth", "Defang", "Refang", "PHPUnserialize"],
+    "Text Manipulation": ["SortLines", "NaturalSortLines", "ReverseLines", "ReverseString", "ShuffleLines", "ShuffleCharacters", "RemoveDuplicateLines", "JoinLines", "JoinLinesWithComma", "JoinLinesWithSpace", "CollapseLines", "Trim", "TrimStart", "TrimEnd", "AddSlashes", "RemoveSlashes", "ReplaceSmartQuotes", "MarkdownQuote", "Rot13", "AddLineNumbers", "RemoveLineNumbers", "SpacesToTabs", "TabsToSpaces", "SortJSON", "LineComparer", "listToHTMLList", "Wadsworth", "Defang", "Refang", "PHPUnserialize", "EscapeLineFeeds", "UnescapeLineFeeds"],
     "Generation": ["UUIDGenerator", "LoremIpsum", "NewBoopScript", "generateHashtag", "contrastingColor", "CreateProjectGlossaryMarkdown"],
     "Extraction": ["ExtractURLs", "ExtractEmails", "CountCharacters", "CountWords", "CountLines", "SumAll", "CalculateSize"],
     "Developer Utilities": ["JWTDecode", "RegexEscape", "EvalJavascript", "DateToTimestamp", "DateToUTC", "TimeToSecond", "TestScript"]
@@ -141,6 +141,16 @@
       "title": "Kebab Case Converter - Convert to kebab-case",
       "metaDescription": "Convert text to kebab-case format online for free. Transform text for CSS classes and URL slugs. Client-side processing.",
       "keywords": ["kebab case converter", "convert to kebab-case", "kebab case online", "text to kebab-case"]
+    },
+    "EscapeLineFeeds": {
+      "title": "Escape Line Feeds - Convert Newlines to \\n Online",
+      "metaDescription": "Convert actual newlines to literal \\n escape sequences online for free. Turn multi-line text into single-line strings. 100% client-side.",
+      "keywords": ["escape newlines", "newline to \\n", "convert newlines", "line feed escape", "escape line breaks"]
+    },
+    "UnescapeLineFeeds": {
+      "title": "Unescape Line Feeds - Convert \\n to Newlines Online",
+      "metaDescription": "Convert literal \\n and \\r\\n escape sequences to actual newlines online for free. Turn single-line strings into multi-line text. 100% client-side.",
+      "keywords": ["unescape newlines", "\\n to newline", "convert \\n", "line feed unescape", "unescape line breaks"]
     }
   }
 }

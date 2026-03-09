@@ -7701,6 +7701,32 @@ function main(input) {
 });
 
 scripts.push({
+  name: "Escape Line Feeds",
+  description: "Converts actual newlines to literal \\n sequences",
+  author: "Flxify",
+  icon: "term",
+  tags: "newline,linefeed,escape,\\n,convert,line break",
+  execute: function(require, state) {
+/**
+  {
+    "api": 1,
+    "name": "Escape Line Feeds",
+    "description": "Converts actual newlines to literal \\n sequences",
+    "author": "Flxify",
+    "icon": "term",
+    "tags": "newline,linefeed,escape,\\n,convert,line break"
+  }
+**/
+
+function main(state) {
+  state.text = state.text.replace(/\r\n/g, '\\n').replace(/\n/g, '\\n');
+}
+
+    if (typeof main === "function") main(state);
+  }
+});
+
+scripts.push({
   name: "Eval Javascript",
   description: "Executes JavaScript code and appends the output as a comment",
   author: "Sebastiaan Besselsen",
@@ -10404,6 +10430,32 @@ function main(state) {
   } else {
     state.insert(generateUUID());
   }
+}
+
+    if (typeof main === "function") main(state);
+  }
+});
+
+scripts.push({
+  name: "Unescape Line Feeds",
+  description: "Converts literal \\n and \\r\\n sequences to actual newlines",
+  author: "Flxify",
+  icon: "term",
+  tags: "newline,linefeed,unescape,\\n,\\r\\n,convert,line break",
+  execute: function(require, state) {
+/**
+  {
+    "api": 1,
+    "name": "Unescape Line Feeds",
+    "description": "Converts literal \\n and \\r\\n sequences to actual newlines",
+    "author": "Flxify",
+    "icon": "term",
+    "tags": "newline,linefeed,unescape,\\n,\\r\\n,convert,line break"
+  }
+**/
+
+function main(state) {
+  state.text = state.text.replace(/\\r\\n/g, '\n').replace(/\\n/g, '\n');
 }
 
     if (typeof main === "function") main(state);
