@@ -2,7 +2,7 @@
   "name": "flxify",
   "version": "1.0.0",
   "private": true,
-  "description": "Developer text utility tool with 109 executable scripts",
+  "description": "Developer text utility tool with 110 executable scripts",
   "scripts": {
     "build": "node build_app.js",
     "test": "vitest run",
